@@ -27,7 +27,7 @@ public class LoginController {
     public ModelAndView logout(){
         Account account= (Account) httpSession.getAttribute("acc");
         account.setLogged(false);
-        httpSession.setAttribute("acc",account);
+        httpSession.setAttribute("acc",null);
         accService.save(account);
         ModelAndView modelAndView=new ModelAndView("redirect:/home");
         return modelAndView;

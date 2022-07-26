@@ -202,7 +202,7 @@
                                 </li>
                                 <li><a href="/login" th:if="${account}==null">Login</a></li>
                                 <li><a href="/login" th:if="${account}!=null" th:text="${'Xin chào'+ ' : ' + account.userName}"></a></li>
-                                <li><a href="/login" th:if="${account}!=null">logout</a></li>
+                                <li><a href="/logout" th:if="${account}!=null">logout</a></li>
                             </ul>
 
                             <!-- Search Form  -->
