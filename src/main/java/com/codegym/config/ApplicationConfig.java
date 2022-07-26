@@ -84,7 +84,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
         dataSource.setDriverClassName("com.mysql.cj.jdbc.Driver");
         dataSource.setUrl("jdbc:mysql://localhost:3306/blog_c0322g1");
         dataSource.setUsername("root");
-        dataSource.setPassword("12345678");
+        dataSource.setPassword("hauhc1203");
         return dataSource;
     }
 
@@ -133,7 +133,7 @@ public class ApplicationConfig extends WebMvcConfigurerAdapter implements Applic
     @Override
     public void addResourceHandlers(ResourceHandlerRegistry registry) {
         registry.addResourceHandler("/**")
-                .addResourceLocations("file:/Users/johntoan98gmail.com/Desktop/Blog/src/main/webapp/WEB-INF/");
+                .addResourceLocations("file:/home/hauhc1203/Desktop/Blog_C0322g1/src/main/webapp/WEB-INF/");
 
     }
 }

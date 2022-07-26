@@ -3,9 +3,11 @@ package com.codegym.controllers;
 import com.codegym.models.Blogs;
 import com.codegym.models.Category;
 import com.codegym.models.Comment;
+import com.codegym.models.Like;
 import com.codegym.service.BlogService;
 import com.codegym.service.CategoryService;
 import com.codegym.service.CommentService;
+import com.codegym.service.LikeService;
 import com.codegym.validate.ValidateBlog;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.PageRequest;
@@ -36,6 +38,12 @@ public class BlogController {
     @Autowired
     CommentService commentService;
 
+    @Autowired
+    LikeService likeService;
+    @ModelAttribute(name = "like")
+    public Like like(){
+        return new Like();
+    }
     @ModelAttribute(name = "blog")
     public Blogs blogs(){
         return new Blogs();
@@ -70,6 +78,8 @@ public class BlogController {
         ModelAndView modelAndView = new ModelAndView("single-post");
         modelAndView.addObject("comments",commentService.findAllByBlog(id));
         modelAndView.addObject("blog_show", blogService.findById(id).get());
+        modelAndView.addObject("likeNum",likeService.count(id));
+
         return modelAndView;
     }
     @PostMapping("/comment/{idBlog}")
@@ -77,6 +87,14 @@ public class BlogController {
         Blogs blogs = blogService.findById(idBlog).get();
         comment.setBlogs(blogs);
         commentService.save(comment);
+        ModelAndView modelAndView = new ModelAndView("redirect:/show?id="+idBlog);
+        return modelAndView;
+    }
+    @GetMapping("/like/{idBlog}")
+    public ModelAndView like(Like like, @PathVariable("idBlog") long idBlog) {
+        Blogs blogs = blogService.findById(idBlog).get();
+        like.setBlogs(blogs);
+        likeService.save(like);
         ModelAndView modelAndView = new ModelAndView("redirect:/show?id="+idBlog);
         return modelAndView;
     }
@@ -92,7 +110,7 @@ public class BlogController {
         }
         String nameImg = upImg.getOriginalFilename();
         try {
-            FileCopyUtils.copy(upImg.getBytes(), new File("/Users/johntoan98gmail.com/Desktop/Blog/src/main/webapp/WEB-INF/img/" + nameImg));
+            FileCopyUtils.copy(upImg.getBytes(), new File("/home/hauhc1203/Desktop/Blog_C0322g1/src/main/webapp/WEB-INF/img/" + nameImg));
         } catch (IOException e) {
             e.printStackTrace();
         }
