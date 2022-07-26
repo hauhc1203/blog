@@ -1,9 +1,6 @@
 package com.codegym.controllers;
 
-import com.codegym.models.Blogs;
-import com.codegym.models.Category;
-import com.codegym.models.Comment;
-import com.codegym.models.Like;
+import com.codegym.models.*;
 import com.codegym.service.BlogService;
 import com.codegym.service.CategoryService;
 import com.codegym.service.CommentService;
@@ -19,6 +16,7 @@ import org.springframework.web.bind.annotation.*;
 import org.springframework.web.multipart.MultipartFile;
 import org.springframework.web.servlet.ModelAndView;
 
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
 import java.io.File;
 import java.io.IOException;
@@ -26,6 +24,8 @@ import java.util.List;
 
 @Controller
 public class BlogController {
+    @Autowired
+    HttpSession httpSession;
     @Autowired
     BlogService blogService;
 
@@ -54,9 +54,20 @@ public class BlogController {
         return categoryService.getAll();
     }
 
+    @GetMapping("/home")
+    public ModelAndView home() {
+        ModelAndView modelAndView = new ModelAndView("index");
+        Account account= (Account) httpSession.getAttribute("acc");
+        modelAndView.addObject("account",account);
+
+        return modelAndView;
+    }
+
     @GetMapping("/blogs")
     public ModelAndView show(@RequestParam(defaultValue = "0") int page) {
         ModelAndView modelAndView = new ModelAndView("home");
+        Account account= (Account) httpSession.getAttribute("acc");
+        modelAndView.addObject("account",account);
         modelAndView.addObject("blogs", blogService.getAll(PageRequest.of(page, 2, Sort.by("date"))));
         return modelAndView;
     }
@@ -79,6 +90,9 @@ public class BlogController {
         modelAndView.addObject("comments",commentService.findAllByBlog(id));
         modelAndView.addObject("blog_show", blogService.findById(id).get());
         modelAndView.addObject("likeNum",likeService.count(id));
+        Account account= (Account) httpSession.getAttribute("acc");
+        modelAndView.addObject("account",account);
+
 
         return modelAndView;
     }

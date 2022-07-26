@@ -28,9 +28,17 @@ com/codegym/aop/DemoAOP.java
  com.codegym.aop.DemoAOP
 com/codegym/service/LikeService.java
  com.codegym.service.LikeService
-com/codegym/controllers/BlogController.java
- com.codegym.controllers.BlogController
+com/codegym/controllers/LoginController.java
+ com.codegym.controllers.LoginController
 com/codegym/repository/ILikeRepo.java
  com.codegym.repository.ILikeRepo
 com/codegym/models/Like.java
  com.codegym.models.Like
+com/codegym/models/Account.java
+ com.codegym.models.Account
+com/codegym/repository/IAccRepo.java
+ com.codegym.repository.IAccRepo
+com/codegym/service/AccService.java
+ com.codegym.service.AccService
+com/codegym/controllers/BlogController.java
+ com.codegym.controllers.BlogController

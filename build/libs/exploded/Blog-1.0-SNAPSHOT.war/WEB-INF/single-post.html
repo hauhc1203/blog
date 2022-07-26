@@ -128,13 +128,13 @@
                         <!-- Nav Start -->
                         <div class="classynav">
                             <ul>
-                                <li><a href="index.html">Home</a></li>
+                                <li><a href="/home">Home</a></li>
                                 <li><a href="#">Pages</a>
                                     <ul class="dropdown">
                                         <li><a href="index.html">Home</a></li>
                                         <li><a href="about-us.html">About Us</a></li>
                                         <li><a href="single-post.html">Single Post</a></li>
-                                        <li><a href="contact.html">Contact</a></li>
+                                        <li><a href="/login">Login</a></li>
                                         <li><a href="coming-soon.html">Coming Soon</a></li>
                                     </ul>
                                 </li>
@@ -163,7 +163,7 @@
                                         <li><a href="#">Catagory 1</a></li>
                                     </ul>
                                 </li>
-                                <li><a href="about-us.html">About Us</a></li>
+                                <li><a href="/about">About Us</a></li>
                                 <li><a href="#">Megamenu</a>
                                     <div class="megamenu">
                                         <ul class="single-mega cn-col-4">
@@ -200,7 +200,9 @@
                                         </ul>
                                     </div>
                                 </li>
-                                <li><a href="contact.html">Contact</a></li>
+                                <li><a href="/login" th:if="${account}==null">Login</a></li>
+                                <li><a href="/login" th:if="${account}!=null" th:text="${'Xin chào'+ ' : ' + account.userName}"></a></li>
+                                <li><a href="/login" th:if="${account}!=null">logout</a></li>
                             </ul>
 
                             <!-- Search Form  -->

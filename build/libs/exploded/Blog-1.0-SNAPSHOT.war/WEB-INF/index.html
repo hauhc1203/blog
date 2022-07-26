@@ -119,7 +119,7 @@
                             <!-- Nav Start -->
                             <div class="classynav">
                                 <ul>
-                                    <li><a href="index.html">Home</a></li>
+                                    <li><a href="/home">Home</a></li>
                                     <li><a href="#">Pages</a>
                                         <ul class="dropdown">
                                             <li><a href="index.html">Home</a></li>
@@ -191,7 +191,10 @@
                                             </ul>
                                         </div>
                                     </li>
-                                    <li><a href="contact.html">Contact</a></li>
+                                    <li><a href="/login" th:if="${account}==null">Login</a></li>
+                                    <li><a href="/login" th:if="${account}!=null" th:text="${'Xin chào'+ ' : ' + account.userName}">Login</a></li>
+                                    <li><a href="/login" th:if="${account}!=null">logout</a></li>
+
                                 </ul>
 
                                 <!-- Search Form  -->
